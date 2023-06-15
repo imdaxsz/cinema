@@ -1,8 +1,9 @@
 import Navbar from './components/Navbar'
 import './globals.css'
-import { Inter } from 'next/font/google'
+// import { Inter } from 'next/font/google'
+import './fonts/font.css'
 
-const inter = Inter({ subsets: ['latin'] })
+// const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Moives',
@@ -17,9 +18,14 @@ export default function RootLayout({
   
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body>
         <Navbar />
-        {children}
+        <div className="container">
+          {children}
+          <footer>
+            자료 제공 - TBDB (www.themoviedb.org)
+          </footer>
+        </div>
       </body>
     </html>
   )

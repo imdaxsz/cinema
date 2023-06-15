@@ -3,34 +3,33 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import styles from '../styles/navbar.module.css'
+import Image from 'next/image'
 
 export default function Navbar() {
   const pathname = usePathname()
   return (
     <nav className={styles.nav}>
-      <Link href="/" className={pathname === '/' ? styles.active : ''}>
-        Home
+      <Link href="/" className={`flex ${pathname === '/' ? styles.active : ''}`}>
+        <div className={styles.logo}>
+          <Image src="/logo.png" alt="logo" fill></Image>
+        </div>
+        <span>Cinema</span>
       </Link>
       <Link
-        href="/about"
-        className={pathname === '/about' ? styles.active : ''}
+        href="/upcoming"
+        className={pathname === '/upcoming' ? styles.active : ''}
       >
-        About
+        개봉 예정
       </Link>
-      {/* <style jsx>{`
-        nav {
-          display: flex;
-          justify-content: space-between;
-          background: darkcyan;
-          padding: 18px 20px;
-        }
-        span {
-          color: white;
-        }
-        .active {
-          font-weight: bold;
-        }
-      `}</style> */}
+      <Link
+        href="/genres"
+        className={pathname === '/genres' ? styles.active : ''}
+      >
+        장르별
+      </Link>
+      <Link href="/my" className={pathname === '/my' ? styles.active : ''}>
+        My
+      </Link>
     </nav>
   )
 }
