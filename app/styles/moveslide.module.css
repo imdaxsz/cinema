@@ -1,0 +1,104 @@
+.wrapper {
+  width: 100%;
+}
+
+.content {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 30px;
+  position: relative;
+}
+
+.slide-wrapper {
+  max-width: 980px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.slide {
+  width: 300vw;
+  display: flex;
+  transition: all 0.4s;
+  /* gap: 20px; */
+  /* flex-wrap: wrap; */
+}
+
+.slide a {
+  color: black;
+}
+
+.content h3 {
+  margin: 15px 0;
+  font-size: 24px;
+}
+
+.content button {
+  cursor: pointer;
+  border: none;
+  color: rgb(232, 232, 232);
+  background-color: white;
+}
+
+.movie {
+  width: 184px;
+  height: 326px;
+  margin-right: 15px;
+}
+
+.movie .img {
+  width: 100%;
+  height: 262px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.movie img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+  /* transition: transform 0.2s ease-in-out;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
+  cursor: pointer;
+}
+.movie:hover img {
+  transform: scale(1.05);
+}
+
+.title {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 14px;
+}
+
+.content button {
+  padding: 5px;
+  position: absolute;
+  z-index: 5;
+  top: calc(50% - 22px);
+}
+
+
+.before {
+  left: -20px;
+}
+
+.next {
+  right: -20px;
+}
+
+.btn {
+  width: 30px;
+  height: 30px;
+  transition: all 0.1s;
+}
+
+.btn:hover {
+  color:#a6acb9
+}
