@@ -18,25 +18,12 @@
 .slide {
   width: 300vw;
   display: flex;
-  transition: all 0.4s;
-  /* gap: 20px; */
-  /* flex-wrap: wrap; */
-}
-
-.slide a {
-  color: black;
+  transition: all 0.3s;
 }
 
 .content h3 {
   margin: 15px 0;
   font-size: 24px;
-}
-
-.content button {
-  cursor: pointer;
-  border: none;
-  color: rgb(232, 232, 232);
-  background-color: white;
 }
 
 .movie {
@@ -50,6 +37,7 @@
   height: 262px;
   overflow: hidden;
   border-radius: 12px;
+  position: relative;
 }
 
 .movie img {
@@ -57,8 +45,6 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s;
-  /* transition: transform 0.2s ease-in-out;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; */
   cursor: pointer;
 }
 .movie:hover img {
@@ -75,15 +61,22 @@
   font-size: 18px;
   text-align: center;
   margin-top: 14px;
+  color: black;
 }
 
 .content button {
-  padding: 5px;
   position: absolute;
   z-index: 5;
-  top: calc(50% - 22px);
+  cursor: pointer;
+  background-color: rgba(0,0,0,0);
 }
 
+.arrow {
+  padding: 5px;
+  top: calc(50% - 22px);
+  border: none;
+  color: rgb(232, 232, 232);
+}
 
 .before {
   left: -20px;
@@ -93,6 +86,15 @@
   right: -20px;
 }
 
+.btn-all {
+  top: 11%;
+  right: 30px;
+  border: 1px solid #e2e2e2;
+  border-radius: 15px;
+  padding: 4px 12px;
+  text-align: center;
+}
+
 .btn {
   width: 30px;
   height: 30px;
@@ -100,5 +102,34 @@
 }
 
 .btn:hover {
-  color:#a6acb9
+  color: #a6acb9;
+}
+
+.stillcut {
+  background: #000;
+  width: 100%;
+  height: 360px;
+}
+
+.stillcut .img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 360px;
+  position: relative;
+}
+
+.stillcut img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+
+.trailer {
+  background: #000;
+  width: 100%;
+  height: 460px;
+  margin-bottom: 30px;
 }
