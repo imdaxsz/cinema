@@ -1,17 +1,29 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useSearchParams } from 'next/navigation'
 import styles from '../styles/navbar.module.css'
 import Image from 'next/image'
+import SearchBar from './SearchBar'
 
 export default function Navbar() {
   const pathname = usePathname()
+  const searchParams = useSearchParams()
+  const keyword = searchParams.get('query')
   return (
     <nav className={styles.nav}>
-      <Link href="/" className={`flex ${pathname === '/' ? styles.active : ''}`}>
+      <Link
+        href="/"
+        className={`flex ${pathname === '/' ? styles.active : ''}`}
+      >
         <div className={styles.logo}>
-          <Image src="/logo.png" alt="logo" fill sizes='50vw'></Image>
+          <Image
+            src="/logo.png"
+            priority={true}
+            alt="logo"
+            fill
+            sizes="50vw"
+          ></Image>
         </div>
         <span>Cinema</span>
       </Link>
@@ -33,9 +45,9 @@ export default function Navbar() {
       >
         장르별
       </Link>
-      <Link href="/my" className={pathname === '/my' ? styles.active : ''}>
-        My
-      </Link>
+      <div className={styles.right}>
+        <SearchBar keyword={keyword ? keyword : ''} />
+      </div>
     </nav>
   )
 }

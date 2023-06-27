@@ -1,0 +1,44 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  position: relative;
+  width: 100%;
+  background: #0b173b;
+  border-radius: 30px;
+  border: 2px solid #cacfe0;
+  overflow: hidden;
+}
+
+.icon {
+  position: absolute;
+  right: 0;
+  height: 40px;
+  width: 40px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: #cacfe0;
+}
+
+.input {
+  width: 75%;
+  height: 35px;
+  color: white;
+  position: relative;
+  left: 15px;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}
+
+.container:focus-within {
+  background: white;
+  border: 2px solid #0b173b;
+  transition: all 0.02;
+}
+
+.input:focus {
+  color: black;
+}
