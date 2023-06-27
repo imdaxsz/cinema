@@ -17,6 +17,19 @@ a {
   text-decoration: none;
 }
 
+input {
+  all: unset;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input::placeholder {
+  color: #b4b9c6;
+}
+
+
 .container {
   position: absolute;
   top: 50px;
@@ -35,4 +48,37 @@ footer {
 .flex {
   display: flex;
   align-items: center;
+}
+
+ul {
+  list-style: none;
+}
+
+li {
+  float: left;
+  margin: 0 9px 14px 0;
+  background: #f7f8fa;
+  border-radius: 16px;
+}
+
+li > span, li > a {
+  padding: 0 14px;
+  font-size: 13px;
+  line-height: 30px;
+  color: #888;
+  font-weight: bold;
+}
+
+.selected {
+  background: #444;
+}
+
+.selected span, .selected a {
+  color: #fff;
+}
+
+.tablist {
+  margin: 0 auto;
+  max-width: 1040px;
+  padding: 30px 30px 20px;
 }

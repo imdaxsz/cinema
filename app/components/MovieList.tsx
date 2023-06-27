@@ -9,9 +9,11 @@ import Image from 'next/image'
 export default function MovieList({
   movies,
   filter,
+  genre,
 }: {
   movies: any
   filter: number
+  genre?: string
 }) {
   const [list, setList] = useState<any[]>(movies.results)
   const [currentPage, setCurrentPage] = useState<number>(1)
@@ -20,12 +22,14 @@ export default function MovieList({
     moreData(filter, currentPage, setCurrentPage, setList)
   }
 
-  const title = ['🎞️지금 상영중인 영화💫', '📆개봉 예정 영화✨']
+  const title = ['🎞️지금 상영중인 영화💫', '📆개봉 예정 영화✨', `전체`]
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
-        <h3>{title[filter]}</h3>
+        {
+          genre ? <h3>{genre}</h3> : <h3>{title[filter]}</h3>
+        }
         <div className={styles.list}>
           {list.map((movie: any) => (
             <Link
@@ -37,7 +41,10 @@ export default function MovieList({
               <div className={styles.movie}>
                 <div className={styles.img}>
                   <Image
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} fill sizes='50vw'
+                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    alt={movie.title}
+                    fill
+                    sizes="50vw"
                   />
                 </div>
                 <h4 className={styles.title}>{movie.title}</h4>
