@@ -1,7 +1,5 @@
 'use client'
 import styles from '../styles/moveslide.module.css'
-import { SlArrowLeft, SlArrowRight } from 'react-icons/sl'
-import { useState } from 'react'
 
 export default function Trailer({videos}:{videos:any[]}) {
   return (

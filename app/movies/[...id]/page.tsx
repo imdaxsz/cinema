@@ -1,5 +1,5 @@
 import {
-  fetchData,
+  getDetailData,
   getCastData,
   getImages,
   getVideos,
@@ -11,7 +11,7 @@ import Trailer from '@/app/components/Trailer'
 
 export default async function Detail(props: any) {
   const id = props.params.id[0]
-  const result = await fetchData('detail', id)
+  const result = await getDetailData(id)
   const movie = result?.data
   const people = await getCastData(id)
   const posters = await getImages(id)
@@ -52,7 +52,7 @@ export default async function Detail(props: any) {
         </div>
         <div className={styles.media}>
           {trailer.length > 0 && <Trailer videos={trailer} />}
-          <StillCut images={posters} />
+          {posters.length > 0 && <StillCut images={posters} />}
         </div>
       </div>
     </div>

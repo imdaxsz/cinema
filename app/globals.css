@@ -82,3 +82,15 @@ li > span, li > a {
   max-width: 1040px;
   padding: 30px 30px 20px;
 }
+
+.btn-more {
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 10px;
+  background: white;
+  color: #a6acb9;
+  border: solid 1px #a6acb9;
+  cursor: pointer;
+  margin-top: 15px;
+  width: fit-content;
+}

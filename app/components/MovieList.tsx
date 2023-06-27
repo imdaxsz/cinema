@@ -54,7 +54,7 @@ export default function MovieList({
           ))}
         </div>
         {movies.total_pages > currentPage && (
-          <button onClick={onClick}>더보기</button>
+          <button className='btn-more' onClick={onClick}>더보기</button>
         )}
       </div>
     </div>
