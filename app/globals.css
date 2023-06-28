@@ -61,7 +61,7 @@ li {
   border-radius: 16px;
 }
 
-li > span, li > a {
+li > a {
   padding: 0 14px;
   font-size: 13px;
   line-height: 30px;
@@ -93,4 +93,24 @@ li > span, li > a {
   cursor: pointer;
   margin-top: 15px;
   width: fit-content;
+}
+
+.not-found {
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items:center;
+  height: calc(100vh - 100px);
+  line-height: 30px;
+}
+
+.not-found a, .not-found span {
+  background: white;
+  border: solid 1px #888;
+  border-radius: 12px;
+  padding: 6px 12px;
+  margin: 12px;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
 }
