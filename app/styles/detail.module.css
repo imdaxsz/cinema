@@ -63,6 +63,7 @@
 
 .detail {
   margin-top: 10px;
+  width: 100%;
   max-width: calc(100% - 330px);
   padding-right: 20px;
 }

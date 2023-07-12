@@ -46,7 +46,11 @@ export default function MovieSlide({
                 <div className={styles.movie}>
                   <div className={styles.img}>
                     <Image
-                      src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                      src={
+                        movie.poster_path
+                          ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                          : '/default.png'
+                      }
                       alt={movie.title}
                       fill
                       sizes="50vw"

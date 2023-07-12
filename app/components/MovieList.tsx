@@ -27,9 +27,7 @@ export default function MovieList({
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
-        {
-          genre ? <h3>{genre}</h3> : <h3>{title[filter]}</h3>
-        }
+        {genre ? <h3>{genre}</h3> : <h3>{title[filter]}</h3>}
         <div className={styles.list}>
           {list.map((movie: any) => (
             <Link
@@ -41,7 +39,11 @@ export default function MovieList({
               <div className={styles.movie}>
                 <div className={styles.img}>
                   <Image
-                    src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                    src={
+                      movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                        : '/default.png'
+                    }
                     alt={movie.title}
                     fill
                     sizes="50vw"
@@ -54,7 +56,9 @@ export default function MovieList({
           ))}
         </div>
         {movies.total_pages > currentPage && (
-          <button className='btn-more' onClick={onClick}>더보기</button>
+          <button className="btn-more" onClick={onClick}>
+            더보기
+          </button>
         )}
       </div>
     </div>

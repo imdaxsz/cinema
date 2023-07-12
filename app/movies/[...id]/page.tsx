@@ -3,6 +3,7 @@ import {
   getCastData,
   getImages,
   getVideos,
+  getReleaseDate,
 } from '@/app/utils/fetchData'
 import styles from '../../styles/detail.module.css'
 import Image from 'next/image'
@@ -16,6 +17,7 @@ export default async function Detail(props: any) {
   const people = await getCastData(id)
   const posters = await getImages(id)
   const trailer = await getVideos(id)
+  const releaseDate = await getReleaseDate(movie.title)
 
   return (
     <div className={styles.wrapper}>
@@ -23,7 +25,11 @@ export default async function Detail(props: any) {
         <div className={styles.movie}>
           <div className={styles.img}>
             <Image
-              src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                  : '/default.png'
+              }
               alt={movie.title}
               fill
               sizes="50vw"
@@ -36,16 +42,21 @@ export default async function Detail(props: any) {
             </div>
             <div className={styles.info}>
               <p>
-                장르 : {movie.genres[0].name} / {result?.country}
+                장르 : {movie.genres[0] ? movie.genres[0].name : '미정'} /{' '}
+                {result?.country}
               </p>
-              <p>러닝타임 : {movie.runtime}분</p>
-              <p>개봉 : {movie.release_date}</p>
+              <p>
+                러닝타임 : {movie.runtime === 0 ? '미정' : `${movie.runtime}분`}
+              </p>
+              <p>
+                개봉 : {releaseDate ? releaseDate.replace(/\-/g, '.') : '미정'}
+              </p>
               <p>감독 : {people?.director.name}</p>
               <p>
                 출연 : {people?.cast[0].name}, {people?.cast[1].name}
               </p>
               <div className={styles.overview}>
-                <span>{movie.overview}</span>
+                <span>{movie.overview ? movie.overview : '소개글 없음'}</span>
               </div>
             </div>
           </div>
