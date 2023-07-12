@@ -1,3 +1,19 @@
+const getDate = () => {
+  var date = new Date()
+  var year = date.getFullYear()
+  var month = ('0' + (date.getMonth() + 1)).slice(-2)
+  var day = ('0' + date.getDate()).slice(-2)
+  var lte_month = ('0' + (date.getMonth() + 2)).slice(-2)
+  var lte_year = year
+  if (date.getMonth() + 1 === 12) {
+    lte_month = '01'
+    lte_year = year + 1
+  }
+  var date_gte = year + '-' + month + '-' + day
+  var date_lte = lte_year + '-' + lte_month + '-' + day
+  return { date_gte, date_lte }
+}
+
 // 영화 리스트 조회
 export async function fetchData(option: string, genreId?: string) {
   let res
@@ -12,8 +28,9 @@ export async function fetchData(option: string, genreId?: string) {
       { next: { revalidate: 43200 } },
     )
   } else if (option === 'upcoming') {
+    const {date_gte, date_lte} = getDate()
     res = await fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=ko-KR&page=1&region=KR`,
+      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&include_adult=false&include_video=false&language=ko-KR&page=1&region=KR&release_date.gte=${date_gte}&release_date.lte=${date_lte}&sort_by=popularity.desc`,
       { next: { revalidate: 43200 } },
     )
   } else if (option === 'genres') {
@@ -76,10 +93,9 @@ export const moreData: MoreDataType = async (
     )
   } else if (filter === 1) {
     // 개봉 예정 영화 더보기
+    const {date_gte, date_lte} = getDate()
     res = await fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${
-        process.env.NEXT_PUBLIC_API_KEY
-      }&language=ko-KR&page=${currentPage + 1}&region=KR`,
+      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&include_adult=false&include_video=false&language=ko-KR&page=${currentPage + 1}&region=KR&release_date.gte=${date_gte}&release_date.lte=${date_lte}&sort_by=popularity.desc`,
       { next: { revalidate: 43200 } },
     )
   } else if (filter === 2) {
@@ -183,5 +199,16 @@ export const getGenre = async (id: string) => {
   if (res) {
     const { genres } = await res.json()
     return genres.filter((g: any) => g.id === parseInt(id))[0].name
+  }
+}
+
+// 한국 개봉 날짜 조회
+export const getReleaseDate = async (title: string) => {
+  const res = await fetch(
+    `https://api.themoviedb.org/3/search/movie?query=${title}&api_key=${process.env.NEXT_PUBLIC_API_KEY}&include_adult=false&language=ko-KR&page=1&region=KR`,
+  )
+  if (res) {
+    const { results } = await res.json()
+    return results[0].release_date
   }
 }
