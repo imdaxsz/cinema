@@ -9,12 +9,13 @@ import SearchBar from './SearchBar'
 export default function Navbar() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
-  const keyword = searchParams.get('query')
+  const keyword = searchParams?.get('query')
+
   return (
     <nav className={styles.nav}>
       <Link
         href="/"
-        className={`flex ${pathname === '/' ? styles.active : ''}`}
+        className={`flex ${styles.home} ${pathname === '/' ? styles.active : ''}`}
       >
         <div className={styles.logo}>
           <Image
@@ -46,7 +47,17 @@ export default function Navbar() {
         장르별
       </Link>
       <div className={styles.right}>
-        <SearchBar keyword={keyword ? keyword : ''} />
+        <div className={styles.item}>
+          <SearchBar keyword={keyword ? keyword : ''} />
+        </div>
+        <div className={styles.item}>
+          <Link
+            href="/my"
+            className={pathname === '/my' ? styles.active : ''}
+          >
+            MY
+          </Link>
+        </div>
       </div>
     </nav>
   )

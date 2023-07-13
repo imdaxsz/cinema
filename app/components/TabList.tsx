@@ -3,7 +3,11 @@ import Link from "next/link";
 import { usePathname } from 'next/navigation'
 
 export default function Tablist() {
-  const path = usePathname().split("/")
+  const pathname = usePathname()
+  let path: string[] = []
+  if (pathname) {
+    path = pathname.split("/")
+  }
   return (
     <ul className="tablist">
       <li className={path.length === 2 ? 'selected' : ''}>

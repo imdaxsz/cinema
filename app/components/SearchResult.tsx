@@ -11,7 +11,7 @@ export default function SearchResult({ movies }: { movies: any }) {
   const [list, setList] = useState<any[]>(movies.results)
   const [currentPage, setCurrentPage] = useState<number>(1)
   const searchParams = useSearchParams()
-  const keyword = searchParams.get('query')
+  const keyword = searchParams?.get('query')
 
   const onClick = async () => {
     if (keyword){

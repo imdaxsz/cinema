@@ -71,7 +71,7 @@ export default function Register() {
 
   return (
     <div className={styles.wrapper}>
-      <form onSubmit={onSubmit} className={styles.register}>
+      <form onSubmit={onSubmit} className={styles.form}>
         <input
           name="id"
           type="text"
