@@ -1,8 +1,8 @@
 import Navbar from './components/Navbar'
 import './globals.css'
-// import { Inter } from 'next/font/google'
 import './fonts/font.css'
-
+import { NextAuthProvider } from './providers'
+// import { Inter } from 'next/font/google'
 // const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -21,7 +21,9 @@ export default function RootLayout({
       <body>
         <Navbar />
         <div className="container">
+          <NextAuthProvider>
           {children}
+          </NextAuthProvider>
           <footer>자료 제공 - TBDB (www.themoviedb.org)</footer>
         </div>
       </body>

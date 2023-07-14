@@ -46,11 +46,15 @@ export const authOptions: any = {
 
   callbacks: {
     // 4. jwt 만들 때 실행
-    jwt: async ({ token, user }: { token: any; user: any }) => {
+    jwt: async ({ token, trigger, user, session }: { token: any; trigger: any; user: any, session:any }) => {
       if (user) {
         token.user = {}
         token.user.id = user.id
         token.user.name = user.name
+        token.user.likes = user.likes
+      }
+      if (trigger === "update" && session.name) {
+        token.user.name = session.name
       }
       return token
     },
