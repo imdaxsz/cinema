@@ -17,6 +17,12 @@ a {
   text-decoration: none;
 }
 
+button {
+  font-family: 'NanumGothic';
+  font-weight: bold;
+  cursor: pointer;
+}
+
 input {
   all: unset;
   box-sizing: border-box;
@@ -29,7 +35,6 @@ input::placeholder {
   color: #b4b9c6;
 }
 
-
 .container {
   position: absolute;
   top: 50px;
@@ -37,16 +42,25 @@ input::placeholder {
 }
 
 footer {
-  margin-top: 40px;
   padding: 15px;
   text-align: center;
   font-size: 12px;
   color: rgb(153, 156, 178);
-  background: #0B173B;
+  background: #0b173b;
 }
 
 .flex {
   display: flex;
+  align-items: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.fc-ac {
   align-items: center;
 }
 
@@ -73,7 +87,8 @@ li > a {
   background: #444;
 }
 
-.selected span, .selected a {
+.selected span,
+.selected a {
   color: #fff;
 }
 
@@ -97,14 +112,15 @@ li > a {
 
 .not-found {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   height: calc(100vh - 100px);
   line-height: 30px;
 }
 
-.not-found a, .not-found span {
+.not-found a,
+.not-found span {
   background: white;
   border: solid 1px #888;
   border-radius: 12px;
@@ -113,4 +129,19 @@ li > a {
   color: black;
   font-size: 16px;
   cursor: pointer;
+}
+
+.button {
+  height: fit-content;
+  background: #0b173b;
+  color: white;
+  font-size: 16px;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 20px;
+}
+
+.inform {
+  font-size: 24px;
+  margin-bottom: 30px;
 }

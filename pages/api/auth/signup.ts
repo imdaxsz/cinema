@@ -17,10 +17,11 @@ export default async function handler(
     if (!findResult && result.password) {
       const hash = await bcyprt.hash(result.password, 10)
       result.password = hash
+      result.likes = []
       await db.collection('user_cred').insertOne(result)
-      res.status(200).json('가입 성공')
+      return res.status(200).json('가입 성공')
     } else 
-      res.status(500).json('가입 오류')
+      return res.status(500).json('가입 오류')
   }
   return res.status(405).json('method error')
 }

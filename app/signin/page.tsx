@@ -10,6 +10,7 @@ export default function SignIn() {
   const [password, setPassword] = useState('')
   const [blankPw, setBlankPw] = useState(false)
   const [blankId, setBlankId] = useState(false)
+  const [error, setError] = useState(false)
   const router = useRouter()
 
   const onChangeId = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,9 +35,7 @@ export default function SignIn() {
         if (result?.ok)
           router.push('/')
         if (result?.error)
-          window.alert(
-            '아이디 또는 비밀번호를 잘못 입력했습니다. 다시 확인해주세요.',
-          )
+          setError(true)
       });
     }
   }
@@ -64,6 +63,7 @@ export default function SignIn() {
           className={`${styles.input} ${blankPw ? styles['input-error'] : ''}`}
         />
         {blankPw && <span>비밀번호를 입력해주세요.</span>}
+        {error && <span>아이디 또는 비밀번호를 잘못 입력했습니다. 다시 확인해주세요.</span>}
         <button type="submit">로그인</button>
         <Link href='/register'>회원가입</Link>
       </form>
