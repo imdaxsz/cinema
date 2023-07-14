@@ -6,7 +6,7 @@
 .content {
   max-width: 1040px;
   margin: 0 auto;
-  padding: 30px;
+  padding: 30px 30px 50px;
   position: relative;
 }
 
@@ -61,8 +61,8 @@
 }
 
 .info {
-  width: calc(100% - 136px);
-  margin-left: 12px;
+  width: calc(100% - 145px);
+  margin-left: 25px;
 }
 
 .title {

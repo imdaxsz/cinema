@@ -1,12 +1,12 @@
 import Navbar from './components/Navbar'
-import './globals.css'
+import '@/app/styles/globals.css'
 import './fonts/font.css'
 import { NextAuthProvider } from './providers'
 // import { Inter } from 'next/font/google'
 // const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: 'Movies',
+  title: 'Cinema',
   description: 'Movie app',
 }
 

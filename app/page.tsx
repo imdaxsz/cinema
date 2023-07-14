@@ -8,6 +8,7 @@ export default async function Home() {
     <>
       <MovieSlide filter="🔥HOT🔥" movies={hot?.results} />
       <MovieSlide filter="🎞️지금 상영중인 영화💫" movies={nowPlaying?.results} />
+      <div style={{marginTop: '40px'}}></div>
     </>
   )
 }
