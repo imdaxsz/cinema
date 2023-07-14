@@ -9,6 +9,9 @@ import styles from '../../styles/detail.module.css'
 import Image from 'next/image'
 import StillCut from '@/app/components/StillCut'
 import Trailer from '@/app/components/Trailer'
+import Like from '@/app/components/Like'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/pages/api/auth/[...nextauth]'
 
 export default async function Detail(props: any) {
   const id = props.params.id[0]
@@ -18,22 +21,26 @@ export default async function Detail(props: any) {
   const posters = await getImages(id)
   const trailer = await getVideos(id)
   const releaseDate = await getReleaseDate(movie.title)
+  const session: any = await getServerSession(authOptions)
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
         <div className={styles.movie}>
-          <div className={styles.img}>
-            <Image
-              src={
-                movie.poster_path
-                  ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                  : '/default.png'
-              }
-              alt={movie.title}
-              fill
-              sizes="50vw"
-            />
+          <div>
+            <div className={styles.img}>
+              <Image
+                src={
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                    : '/default.png'
+                }
+                alt={movie.title}
+                fill
+                sizes="50vw"
+              />
+            </div>
+            <Like user={session.user} movieId={id} />
           </div>
           <div className={styles.detail}>
             <div className={styles.title}>
