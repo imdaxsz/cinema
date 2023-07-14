@@ -65,7 +65,7 @@ export default function Register() {
         body: JSON.stringify({ id, name, password }),
       }).then(() => {
         window.alert('가입이 완료되었습니다!')
-        router.push('/')
+        router.push('/signin')
       })
   }
 
