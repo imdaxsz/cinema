@@ -10,12 +10,12 @@ interface LikeProps {
   movieId: string
 }
 
-export default function Like({ user, movieId }: LikeProps) {
+export default function Like({ user, movieId}: LikeProps) {
   const [like, setLike] = useState(false)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`/api/likes?userid=${user.id}&movieid=${movieId}`)
+    fetch(`/api/like?userid=${user.id}&movieid=${movieId}`)
       .then((res) => res.json())
       .then((result) => {
         setLike(result)
@@ -27,7 +27,7 @@ export default function Like({ user, movieId }: LikeProps) {
     if (!user) window.alert('관심 영화 추가는 로그인 후 가능합니다!')
     else {
       // 추가 또는 삭제
-      fetch('/api/likes', {
+      fetch('/api/like', {
         method: 'POST',
         body: JSON.stringify({ id: user.id, movieid: movieId }),
       }).then((res) => {
