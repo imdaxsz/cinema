@@ -14,28 +14,97 @@
   margin: 0 auto;
 }
 
+/* 마이페이지 */
+
 .user {
   width: 100%;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .user p {
-  font-size: 24px;
+  font-size: 26px;
   font-weight: bold;
 }
 
 .user span {
   color: rgb(130, 130, 132);
+  font-size: 16px;
 }
 
 .user a::after {
-  content: ">";
+  content: '>';
   font-size: 15px;
   padding: 0 20px;
   color: rgb(130, 130, 132);
 }
+
+.movies {
+  width: 100%;
+  height: 300px;
+  padding: 10px 0;
+  position: relative;
+}
+
+.movies .title {
+  font-weight: bold;
+  font-size: 22px;
+  width: max-content;
+}
+
+.list {
+  display: flex;
+  padding: 20px 0px;
+  margin-top: 20px;
+}
+
+.btn-all {
+  top: 5%;
+  right: 0px;
+  border: 1px solid #e2e2e2;
+  border-radius: 15px;
+  padding: 4px 12px;
+  text-align: center;
+  position: absolute;
+  z-index: 5;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  font-size: 13px;
+  font-weight: bold;
+  color: black;
+}
+
+.poster {
+  width: 163.71px;
+  height: 218px;
+  margin: 0 10px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.poster:first-child {
+  margin-left: 0;
+}
+
+.poster:last-child {
+  margin-right: 0;
+}
+
+.poster img {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s;
+}
+
+.poster:hover img {
+  transform: scale(1.05);
+}
+
+/* 로그인, 회원가입, 회원정보 수정 */
 
 .form {
   width: 50%;
@@ -64,10 +133,10 @@
   width: 300px;
   height: 50px;
   border-radius: 30px;
-  border:none;
+  border: none;
   font-size: 18px;
-  background: #0B173B;
-  color:white;
+  background: #0b173b;
+  color: white;
   margin-top: 20px;
   cursor: pointer;
 }
@@ -99,27 +168,7 @@
   font-size: 18px;
 }
 
-.id {
-  position: relative;
-}
-
-.check {
-  background: #0b173b;
-  color: white;
-  font-size: 16px;
-  padding: 4px 8px;
-  border-radius: 30px;
-  position: absolute;
-  top: 30%;
-  right: -100px;
-  cursor: pointer;
-}
-
-.movies {
-  width: 100%;
-  height: 300px;
-  border: solid 1px #eee;
-}
+/* 회원 정보 수정 */
 
 .info-wrapper {
   display: flex;
@@ -147,6 +196,6 @@
 }
 
 .hidden {
-  color:blue;
+  color: blue;
   visibility: hidden;
 }

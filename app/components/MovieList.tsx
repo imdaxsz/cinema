@@ -15,14 +15,14 @@ export default function MovieList({
   filter: number
   genre?: string
 }) {
-  const [list, setList] = useState<any[]>(movies.results)
+  const [list, setList] = useState<any[]>(filter !== 3 ? movies.results : movies)
   const [currentPage, setCurrentPage] = useState<number>(1)
 
   const onClick = async () => {
     moreData(filter, currentPage, setCurrentPage, setList)
   }
 
-  const title = ['🎞️지금 상영중인 영화💫', '📆개봉 예정 영화✨', `전체`]
+  const title = ['🎞️지금 상영중인 영화💫', '📆개봉 예정 영화✨', '전체', '관심 영화']
 
   return (
     <div className={styles.wrapper}>
@@ -50,7 +50,7 @@ export default function MovieList({
                   />
                 </div>
                 <h4 className={styles.title}>{movie.title}</h4>
-                <span>{movie.release_date} 개봉</span>
+                {filter !== 3 && <span>{movie.release_date} 개봉</span>}
               </div>
             </Link>
           ))}
