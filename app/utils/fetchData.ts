@@ -106,7 +106,8 @@ export const moreData: MoreDataType = async (
       }&language=ko-KR&page=${currentPage + 1}&region=KR`,
       { next: { revalidate: 43200 } },
     )
-  } else if (filter === 3) {
+  } else if (filter === 3) { 
+    // 영화 검색
     res = await fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${
         process.env.NEXT_PUBLIC_API_KEY
@@ -203,12 +204,15 @@ export const getGenre = async (id: string) => {
 }
 
 // 한국 개봉 날짜 조회
-export const getReleaseDate = async (title: string) => {
+export const getReleaseDate = async (id: string) => {
   const res = await fetch(
-    `https://api.themoviedb.org/3/search/movie?query=${title}&api_key=${process.env.NEXT_PUBLIC_API_KEY}&include_adult=false&language=ko-KR&page=1&region=KR`,
+    `https://api.themoviedb.org/3/movie/${id}/release_dates?api_key=${process.env.NEXT_PUBLIC_API_KEY}`,
   )
   if (res) {
     const { results } = await res.json()
-    return results[0].release_date
+    const date = results.find((r: any) => r.iso_3166_1 === "KR").release_dates
+    const theater = date.find((d:any)=> d.type === 3)
+    if (theater) return theater.release_date.split("T")[0]
+    return null
   }
 }

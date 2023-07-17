@@ -20,9 +20,9 @@ export default async function Detail(props: any) {
   const people = await getCastData(id)
   const posters = await getImages(id)
   const trailer = await getVideos(id)
-  const releaseDate = await getReleaseDate(movie.title)
+  const releaseDate = await getReleaseDate(id)
   const session: any = await getServerSession(authOptions)
-
+  
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
@@ -49,7 +49,7 @@ export default async function Detail(props: any) {
             </div>
             <div className={styles.info}>
               <p>
-                장르 : {movie.genres[0] ? movie.genres[0].name : '미정'} /{' '}
+                장르 : {movie.genres[0] ? movie.genres[0].name : '미정'} / {' '}
                 {result?.country}
               </p>
               <p>
