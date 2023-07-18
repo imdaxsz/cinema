@@ -1,7 +1,7 @@
 import { fetchData } from '../utils/fetchData'
 import MovieList from '../components/MovieList'
 
-export default async function UpComing() {
+export default async function NowPlaying() {
   const movies = await fetchData('playing')
 
   return (

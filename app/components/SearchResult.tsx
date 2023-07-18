@@ -15,7 +15,7 @@ export default function SearchResult({ movies }: { movies: any }) {
 
   const onClick = async () => {
     if (keyword){
-      moreData(3, currentPage, setCurrentPage, setList, keyword)
+      moreData(4, currentPage, setCurrentPage, setList, keyword)
     }
   }
 
