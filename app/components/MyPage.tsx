@@ -37,9 +37,9 @@ export default function MyPage({
         <div className={styles.movies}>
           <span className={styles.title}>관심 영화</span>
           {more && (
-              <span onClick={onClickMore} className={styles['btn-all']}>
-                전체보기 &nbsp;&nbsp;&gt;
-              </span>
+            <span onClick={onClickMore} className={styles['btn-all']}>
+              전체보기 &nbsp;&nbsp;&gt;
+            </span>
           )}
           <div className={styles.list}>
             {likes.length === 0 && (
@@ -69,6 +69,9 @@ export default function MyPage({
             ))}
           </div>
         </div>
+        <Link href="/my/leave" className={styles.link}>
+          <span>회원탈퇴</span>
+        </Link>
       </div>
     </div>
   )
