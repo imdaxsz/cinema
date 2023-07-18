@@ -15,7 +15,8 @@
   transition: all 0.2s;
 }
 
-.nav a:hover, .nav a.active {
+.nav a:hover,
+.nav a.active {
   color: white;
 }
 
@@ -56,8 +57,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #cacfe0;
 }
 
-.right a {
-  padding-left: 20px;
+.item span {
+  cursor: pointer;
+}
+
+.item span:hover {
+  color: white;
+}
+
+.active {
+  color: white;
+}
+
+.right span {
+  padding-left: 10px;
 }
