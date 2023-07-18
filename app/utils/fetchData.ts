@@ -106,7 +106,7 @@ export const moreData: MoreDataType = async (
       }&language=ko-KR&page=${currentPage + 1}&region=KR`,
       { next: { revalidate: 43200 } },
     )
-  } else if (filter === 3) { 
+  } else if (filter === 4) { 
     // 영화 검색
     res = await fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${
@@ -133,6 +133,28 @@ export const moreData: MoreDataType = async (
       setCurrentPage((prev) => prev + 1)
     })
   }
+}
+
+type MoreLikesType = (
+  id: string,
+  currentPage: number,
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>,
+  setList: React.Dispatch<React.SetStateAction<any[]>>,
+) => void
+
+// 관심 영화 더보기
+export const getMoreLikes: MoreLikesType = async (id, currentPage, setCurrentPage, setList) => {
+  const res = await fetch(
+    `http://localhost:3000/api/likes?userid=${id}&page=${currentPage+1}`,
+    { cache: 'no-store' },
+  )
+  if (res) {
+    await res.json().then((data) => {
+      setList((prev) => [...prev, ...data.results])
+      setCurrentPage((prev) => prev + 1)
+    })
+  }
+  
 }
 
 // 영화 정보 상세 조회
@@ -210,8 +232,8 @@ export const getReleaseDate = async (id: string) => {
   )
   if (res) {
     const { results } = await res.json()
-    const date = results.find((r: any) => r.iso_3166_1 === "KR").release_dates
-    const theater = date.find((d:any)=> d.type === 3)
+    const date = results.find((r: any) => r.iso_3166_1 === "KR")?.release_dates
+    const theater = date?.find((d:any)=> d.type === 3)
     if (theater) return theater.release_date.split("T")[0]
     return null
   }

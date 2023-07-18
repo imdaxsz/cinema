@@ -3,23 +3,26 @@
 import Link from 'next/link'
 import styles from '../styles/list.module.css'
 import { useState } from 'react'
-import { moreData } from '../utils/fetchData'
+import { getMoreLikes, moreData } from '../utils/fetchData'
 import Image from 'next/image'
 
 export default function MovieList({
   movies,
   filter,
   genre,
+  userId
 }: {
   movies: any
   filter: number
   genre?: string
+  userId?: string
 }) {
-  const [list, setList] = useState<any[]>(filter !== 3 ? movies.results : movies)
+  const [list, setList] = useState<any[]>(movies.results)
   const [currentPage, setCurrentPage] = useState<number>(1)
 
   const onClick = async () => {
-    moreData(filter, currentPage, setCurrentPage, setList)
+    if (filter === 3 && userId) getMoreLikes(userId, currentPage, setCurrentPage, setList)
+    else moreData(filter, currentPage, setCurrentPage, setList)
   }
 
   const title = ['🎞️지금 상영중인 영화💫', '📆개봉 예정 영화✨', '전체', '관심 영화']
