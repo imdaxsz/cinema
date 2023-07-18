@@ -29,7 +29,7 @@ export default async function handler(
           )   
       }
       return res.status(200).json('변경 성공')
-    } else return res.status(500).json('사용자를 찾을 수 없음')
+    } else return res.status(404).json('사용자를 찾을 수 없음')
   }
   return res.status(405).json('method error')
 }

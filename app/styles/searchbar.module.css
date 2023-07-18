@@ -1,5 +1,6 @@
 .container {
   display: flex;
+  height: 40px;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
@@ -9,6 +10,7 @@
   border-radius: 30px;
   border: 2px solid #cacfe0;
   overflow: hidden;
+  padding-left: 12px;
 }
 
 .icon {
@@ -24,7 +26,7 @@
 
 .input {
   width: 75%;
-  height: 35px;
+  height: 100px;
   color: white;
   position: relative;
   left: 15px;

@@ -23,12 +23,12 @@ button {
   cursor: pointer;
 }
 
-input {
+input:not([type='checkbox']) {
   all: unset;
-  box-sizing: border-box;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  box-sizing: border-box;
 }
 
 input::placeholder {
