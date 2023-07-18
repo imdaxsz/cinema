@@ -8,7 +8,10 @@ export default async function Likes() {
   let likes
   
   if (session) {
-    likes = await fetch(`http://localhost:3000/api/likes?userid=${session.user.id}`).then((res) => res.json())
+    likes = await fetch(
+      `http://localhost:3000/api/likes?userid=${session.user.id}&page=1`,
+      { cache: 'no-store' },
+    ).then((res) => res.json())
   }
-  return session ? <MovieList movies={likes} filter={3} /> : <NotAllowed />
+  return session ? <MovieList movies={likes} filter={3} userId={session.user.id} /> : <NotAllowed />
 }

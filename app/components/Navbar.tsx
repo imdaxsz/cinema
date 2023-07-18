@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import styles from '../styles/navbar.module.css'
 import Image from 'next/image'
 import SearchBar from './SearchBar'
@@ -10,12 +10,19 @@ export default function Navbar() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
   const keyword = searchParams?.get('query')
+  const router = useRouter()
+  const onClickMy = () => {
+    router.refresh()
+    router.push('/my')
+  }
 
   return (
     <nav className={styles.nav}>
       <Link
         href="/"
-        className={`flex ${styles.home} ${pathname === '/' ? styles.active : ''}`}
+        className={`flex ${styles.home} ${
+          pathname === '/' ? styles.active : ''
+        }`}
       >
         <div className={styles.logo}>
           <Image
@@ -51,12 +58,12 @@ export default function Navbar() {
           <SearchBar keyword={keyword ? keyword : ''} />
         </div>
         <div className={styles.item}>
-          <Link
-            href="/my"
+          <span
+            onClick={onClickMy}
             className={pathname === '/my' ? styles.active : ''}
           >
             MY
-          </Link>
+          </span>
         </div>
       </div>
     </nav>

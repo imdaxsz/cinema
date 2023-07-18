@@ -1,9 +1,26 @@
+'use client'
 import styles from '@/app/styles/my.module.css'
 import Link from 'next/link'
 import LogoutBtn from './LogoutBtn'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
-export default function MyPage({ user, likes }: { user: any; likes: any[] }) {
+export default function MyPage({
+  user,
+  likes,
+  more,
+}: {
+  user: any
+  likes: any[]
+  more: boolean
+}) {
+  const router = useRouter()
+
+  const onClickMore = () => {
+    router.refresh()
+    router.push('/my/likes')
+  }
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
@@ -19,12 +36,10 @@ export default function MyPage({ user, likes }: { user: any; likes: any[] }) {
         </div>
         <div className={styles.movies}>
           <span className={styles.title}>관심 영화</span>
-          {likes.length > 5 && (
-            <Link href="/my/likes">
-              <span className={styles['btn-all']}>
+          {more && (
+              <span onClick={onClickMore} className={styles['btn-all']}>
                 전체보기 &nbsp;&nbsp;&gt;
               </span>
-            </Link>
           )}
           <div className={styles.list}>
             {likes.length === 0 && (
