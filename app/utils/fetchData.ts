@@ -25,25 +25,25 @@ export async function fetchData(option: string, genreId?: string) {
   } else if (option === 'playing') {
     res = await fetch(
       `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=ko-KR&page=1&region=KR`,
-      { next: { revalidate: 43200 } },
+      { next: { revalidate: 21600 } },
     )
   } else if (option === 'upcoming') {
     const {date_gte, date_lte} = getDate()
     res = await fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&include_adult=false&include_video=false&language=ko-KR&page=1&region=KR&release_date.gte=${date_gte}&release_date.lte=${date_lte}&sort_by=popularity.desc`,
-      { next: { revalidate: 43200 } },
+      { next: { revalidate: 21600 } },
     )
   } else if (option === 'genres') {
     // 장르별 조회
     if (!genreId) {
       res = await fetch(
         `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=ko-KR&page=1&region=KR`,
-        { next: { revalidate: 43200 } },
+        { next: { revalidate: 21600 } },
       )
     } else {
       res = await fetch(
         `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&include_adult=false&include_video=false&language=ko-KR&page=1&region=KR&sort_by=popularity.desc&with_genres=${genreId}`,
-        { next: { revalidate: 43200 } },
+        { next: { revalidate: 21600 } },
       )
     }
   }
@@ -57,7 +57,7 @@ export async function fetchData(option: string, genreId?: string) {
 export const searchData = async (title: string) => {
   const res = await fetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&query=${title}&include_adult=false&language=ko-KR&page=1`,
-    { next: { revalidate: 43200 } },
+    { next: { revalidate: 21600 } },
   )
   if (res) {
     const { results, total_pages, total_results } = await res.json()
@@ -96,7 +96,7 @@ export const moreData: MoreDataType = async (
     const {date_gte, date_lte} = getDate()
     res = await fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.NEXT_PUBLIC_API_KEY}&include_adult=false&include_video=false&language=ko-KR&page=${currentPage + 1}&region=KR&release_date.gte=${date_gte}&release_date.lte=${date_lte}&sort_by=popularity.desc`,
-      { next: { revalidate: 43200 } },
+      { next: { revalidate: 21600 } },
     )
   } else if (filter === 2) {
     // 장르 전체 영화 더보기
@@ -104,7 +104,7 @@ export const moreData: MoreDataType = async (
       `https://api.themoviedb.org/3/movie/popular?api_key=${
         process.env.NEXT_PUBLIC_API_KEY
       }&language=ko-KR&page=${currentPage + 1}&region=KR`,
-      { next: { revalidate: 43200 } },
+      { next: { revalidate: 21600 } },
     )
   } else if (filter === 4) { 
     // 영화 검색
@@ -114,7 +114,7 @@ export const moreData: MoreDataType = async (
       }&query=${title}&include_adult=false&language=ko-KR&page=${
         currentPage + 1
       }`,
-      { next: { revalidate: 43200 } },
+      { next: { revalidate: 21600 } },
     )
   } else {
     // 장르별 영화 더보기
@@ -124,7 +124,7 @@ export const moreData: MoreDataType = async (
       }&include_adult=false&include_video=false&language=ko-KR&page=${
         currentPage + 1
       }&region=KR&sort_by=popularity.desc&with_genres=${filter}`,
-      { next: { revalidate: 43200 } },
+      { next: { revalidate: 21600 } },
     )
   }
   if (res) {

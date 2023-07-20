@@ -111,6 +111,7 @@ export default function SettingForm({ user }: { user: any }) {
           onChange={onChangePw}
           onBlur={checkCurrentPw}
           placeholder="현재 비밀번호"
+          autoComplete="off"
           className={`${styles.input} ${
             currentPwError !== 0 ? styles['input-error'] : ''
           }`}
@@ -123,6 +124,7 @@ export default function SettingForm({ user }: { user: any }) {
           onChange={onChangeNewPw}
           onBlur={checkNewPw}
           placeholder="새 비밀번호"
+          autoComplete="off"
           className={`${styles.input} ${
             newPwError !== 0 ? styles['input-error'] : ''
           }`}

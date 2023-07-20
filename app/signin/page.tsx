@@ -48,7 +48,7 @@ export default function SignIn() {
           type="text"
           value={id}
           onChange={onChangeId}
-          onBlur={()=>setBlankId(id.length <= 0)}
+          onBlur={() => setBlankId(id.length <= 0)}
           placeholder="아이디"
           className={`${styles.input} ${blankId ? styles['input-error'] : ''}`}
         />
@@ -58,14 +58,19 @@ export default function SignIn() {
           type="password"
           value={password}
           onChange={onChangePw}
-          onBlur={()=>setBlankPw(password.length <= 0)}
+          onBlur={() => setBlankPw(password.length <= 0)}
+          autoComplete="off"
           placeholder="비밀번호"
           className={`${styles.input} ${blankPw ? styles['input-error'] : ''}`}
         />
         {blankPw && <span>비밀번호를 입력해주세요.</span>}
-        {error && <span>아이디 또는 비밀번호를 잘못 입력했습니다. 다시 확인해주세요.</span>}
+        {error && (
+          <span>
+            아이디 또는 비밀번호를 잘못 입력했습니다. 다시 확인해주세요.
+          </span>
+        )}
         <button type="submit">로그인</button>
-        <Link href='/register'>회원가입</Link>
+        <Link href="/register">회원가입</Link>
       </form>
     </div>
   )

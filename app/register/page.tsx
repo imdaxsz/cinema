@@ -112,6 +112,7 @@ export default function Register() {
           onChange={onChangePw}
           onBlur={checkPassword}
           placeholder="비밀번호"
+          autoComplete="off"
           className={`${styles.input} ${
             validatePw === false ? styles['input-error'] : ''
           }`}
