@@ -15,7 +15,7 @@ export default function Like({ user, movieId}: LikeProps) {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`/api/like?userid=${user.id}&movieid=${movieId}`)
+    fetch(`/api/like?&movieid=${movieId}`)
       .then((res) => res.json())
       .then((result) => {
         setLike(result)

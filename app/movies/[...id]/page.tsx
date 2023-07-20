@@ -40,7 +40,7 @@ export default async function Detail(props: any) {
                 sizes="50vw"
               />
             </div>
-            <Like user={session.user} movieId={id} />
+            <Like user={session?.user} movieId={id} />
           </div>
           <div className={styles.detail}>
             <div className={styles.title}>
