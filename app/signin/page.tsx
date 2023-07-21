@@ -32,6 +32,7 @@ export default function SignIn() {
         password: password,
         redirect: false,
       }).then((result) => {
+        console.log(result)
         if (result?.ok)
           router.push('/')
         if (result?.error)

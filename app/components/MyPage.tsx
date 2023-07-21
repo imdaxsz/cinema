@@ -11,8 +11,8 @@ export default function MyPage({
   more,
 }: {
   user: any
-  likes: any[]
-  more: boolean
+  likes?: any[]
+  more?: boolean
 }) {
   const router = useRouter()
 
@@ -34,7 +34,7 @@ export default function MyPage({
           </div>
           <LogoutBtn />
         </div>
-        <div className={styles.movies}>
+        {/* <div className={styles.movies}>
           <span className={styles.title}>관심 영화</span>
           {more && (
             <span onClick={onClickMore} className={styles['btn-all']}>
@@ -68,7 +68,7 @@ export default function MyPage({
               </Link>
             ))}
           </div>
-        </div>
+        </div> */}
         <Link href="/my/leave" className={styles.link}>
           <span>회원탈퇴</span>
         </Link>
