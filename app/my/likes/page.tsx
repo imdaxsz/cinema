@@ -9,7 +9,7 @@ export default async function Likes() {
   
   if (session) {
     likes = await fetch(
-      `http://localhost:3000/api/likes?userid=${session.user.id}&page=1`,
+      `${process.env.API_ROOT}/api/likes?userid=${session.user.id}&page=1`,
       { cache: 'no-store' },
     ).then((res) => res.json())
   }
