@@ -14,8 +14,8 @@ export default async function My() {
       { cache: 'no-store' },
     ).then((res) => res.json())
     
-    list = results.length > 4 ? results.slice(0, 5) : results
-    more = results.length > 4
+    list = results.length > 5 ? results.slice(0, 5) : results
+    more = results.length > 5
   }
 
     return session ? <MyPage user={session.user} likes={list} more={more} /> : <NotAllowed />
