@@ -154,7 +154,7 @@ export const getMoreLikes: MoreLikesType = async (
   setList,
 ) => {
   const res = await fetch(
-    `${process.env.API_ROOT}/api/likes?userid=${id}&page=${currentPage + 1}`,
+    `/api/likes?userid=${id}&page=${currentPage + 1}`,
     { cache: 'no-store' },
   )
   if (res) {

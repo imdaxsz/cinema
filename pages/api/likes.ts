@@ -6,6 +6,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   const findResult = await db.collection('user_cred').findOne({ id: req.query.userid })
   if (findResult) {
     let list: any[] = []
+    const total_pages = Math.ceil(findResult.likes.length / 20)
     const page = parseInt(req.query.page as string)
     const end = findResult.likes.length < page*20 ? findResult.likes.length : page*20
     for (let i = 20*(page-1); i < end; i++){
@@ -18,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         list = [...list, movie]
       }
     }
-    const data = { total_pages: list.length / 20 + 1, results: list }
+    const data = { total_pages, results: list }
     return res.status(200).json(data)
   } else return res.status(404).json('존재하지 않는 사용자입니다.')
 }
