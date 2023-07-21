@@ -11,4 +11,4 @@ Next.js를 가볍게 공부하면서 만든 간단한 영화 정보 조회 서�
 <br/>
 
 ### `Link`
-▶️ [사이트 바로가기](cinema-green-sigma.vercel.app)
+▶️ [사이트 바로가기](https://cinema-green-sigma.vercel.app)
