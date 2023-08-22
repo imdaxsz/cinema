@@ -28,8 +28,7 @@ export default function Register() {
           return res.text()
         })
         .then((result) => setMessage(result.replace(/\"/gi, '')))
-    }
-    else setValidateId(false)
+    } else setValidateId(false)
   }
 
   const checkPassword = () => {
@@ -39,8 +38,7 @@ export default function Register() {
   }
 
   const checkName = () => {
-    if (name.length <= 0)
-      setValidateName(false)
+    if (name.length <= 0) setValidateName(false)
     else setValidateName(true)
   }
 

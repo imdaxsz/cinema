@@ -2,15 +2,16 @@
 
 import Link from 'next/link'
 import styles from '../styles/list.module.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getMoreLikes, moreData } from '../utils/fetchData'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 export default function MovieList({
   movies,
   filter,
   genre,
-  userId
+  userId,
 }: {
   movies: any
   filter: number
@@ -19,13 +20,24 @@ export default function MovieList({
 }) {
   const [list, setList] = useState<any[]>(movies.results)
   const [currentPage, setCurrentPage] = useState<number>(1)
+  const router = useRouter()
 
   const onClick = async () => {
-    if (filter === 3 && userId) getMoreLikes(userId, currentPage, setCurrentPage, setList)
+    if (filter === 3 && userId)
+      getMoreLikes(userId, currentPage, setCurrentPage, setList)
     else moreData(filter, currentPage, setCurrentPage, setList)
   }
 
-  const title = ['🎞️지금 상영중인 영화💫', '📆개봉 예정 영화✨', '전체', '관심 영화']
+  const title = [
+    '🎞️지금 상영중인 영화💫',
+    '📆개봉 예정 영화✨',
+    '전체',
+    '관심 영화',
+  ]
+
+  useEffect(() => {
+    router.refresh()
+  }, [])
 
   return (
     <div className={styles.wrapper}>

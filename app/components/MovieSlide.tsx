@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import styles from '../styles/moveslide.module.css'
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 
@@ -29,6 +29,10 @@ export default function MovieSlide({
       setNum((prev) => prev + 1)
     }
   }
+
+  useEffect(() => {
+    router.refresh();
+  }, []);
 
   return (
     <div className={styles.wrapper}>
