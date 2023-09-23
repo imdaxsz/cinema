@@ -10,5 +10,13 @@ Next.js를 가볍게 공부하면서 만든 간단한 영화 정보 조회 서�
 
 <br/>
 
-### `Link`
+## Tech Stack
+
+<img src="https://img.shields.io/badge/Nextjs-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"> <img src="https://img.shields.io/badge/Typescript-3178C6?style=for-the-badge&logo=Typescript&logoColor=white">
+<img src="https://img.shields.io/badge/css modules-f5f5f5?style=for-the-badge&logo=cssmodules&logoColor=000000">
+<img src="https://img.shields.io/badge/mongodb-47A248?style=for-the-badge&logo=mongodb&logoColor=white">
+
+<br/>
+
+## Link
 ▶️ [사이트 바로가기](https://cinema-green-sigma.vercel.app)
