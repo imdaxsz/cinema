@@ -1,6 +1,8 @@
 import MovieSlide from './components/MovieSlide'
 import { fetchData } from './utils/fetchData'
 
+export const dynamic = 'force-dynamic' 
+
 export default async function Home() {
   const hot = await fetchData('hot')
   const nowPlaying = await fetchData('playing')
