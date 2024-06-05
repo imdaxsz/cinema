@@ -25,7 +25,7 @@ export async function fetchData(option: string, genreId?: string) {
   } else if (option === 'playing') {
     res = await fetch(
       `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=ko-KR&page=1&region=KR`,
-      { next: { revalidate: 21600 } },
+      { next: { revalidate: 1800 } },
     )
   } else if (option === 'upcoming') {
     const { date_gte, date_lte } = getDate()
