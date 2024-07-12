@@ -1,7 +1,7 @@
 import { MongoClient } from 'mongodb'
 
-const url =
-  'mongodb+srv://admin:qwert0405@cluster0.dggv7bb.mongodb.net/?retryWrites=true&w=majority'
+const url = process.env.DB_URL ?? ''
+
 const options: any = { useNewUrlParser: true }
 let connectDB: Promise<MongoClient>
 
@@ -15,4 +15,6 @@ if (process.env.NODE_ENV === 'development') {
   connectDB = new MongoClient(url, options).connect()
 }
 
-export { connectDB }
+const db = (await connectDB).db('cinema')
+
+export { db }
