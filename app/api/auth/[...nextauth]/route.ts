@@ -1,4 +1,4 @@
-import { connectDB } from '@/util/database'
+import { db } from '@/util/database'
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcrypt'
@@ -7,7 +7,7 @@ export const authOptions: any = {
   providers: [
     CredentialsProvider({
       // 1. 로그인 페이지 폼 자동 생성
-      name: 'credentials',
+      name: '로그인',
       credentials: {
         id: { label: '아이디', type: 'text' },
         password: { label: '비밀번호', type: 'password' },
@@ -16,8 +16,7 @@ export const authOptions: any = {
       // 2. 로그인 요청 시 실행
       async authorize(credentials) {
         if (credentials !== undefined) {
-          let db = (await connectDB).db('cinema')
-          let user = await db
+          const user = await db
             .collection('user_cred')
             .findOne({ id: credentials.id })
           if (!user) {
@@ -46,14 +45,24 @@ export const authOptions: any = {
 
   callbacks: {
     // 4. jwt 만들 때 실행
-    jwt: async ({ token, trigger, user, session }: { token: any; trigger: any; user: any, session:any }) => {
+    jwt: async ({
+      token,
+      trigger,
+      user,
+      session,
+    }: {
+      token: any
+      trigger: any
+      user: any
+      session: any
+    }) => {
       if (user) {
         token.user = {}
         token.user.id = user.id
         token.user.name = user.name
         token.user.likes = user.likes
       }
-      if (trigger === "update" && session.name) {
+      if (trigger === 'update' && session.name) {
         token.user.name = session.name
       }
       return token
@@ -72,4 +81,6 @@ export const authOptions: any = {
   secret: process.env.NEXTAUTH_SECRET,
 }
 
-export default NextAuth(authOptions)
+const handler = NextAuth(authOptions)
+
+export { handler as GET, handler as POST }
