@@ -15,7 +15,7 @@ export default function SettingForm({ user }: { user: any }) {
   const [pwError, setPwError] = useState(0)
 
   const [change, setChange] = useState(false) // 정보에 변화가 있는지
-  const { data: session, status, update } = useSession()
+  const { status, update } = useSession()
   const router = useRouter()
 
   const pwErrorMessage = [
@@ -61,21 +61,20 @@ export default function SettingForm({ user }: { user: any }) {
     if (isSame) setPwError(2)
 
     if (!blankName && newPwError === 0 && !isBlankCurrentPw && !isBlankNewPw && !isSame) {
-      fetch('/api/auth/changeInfo', {
-        method: 'POST',
+      const res = await fetch('/api/auth/user', {
+        method: 'PATCH',
         body: JSON.stringify({ id: user.id, name, newPw, currentPw }),
-      }).then((res) => {
-        if (res.status === 400)
-          setPwError(4)
-        else if (res.status === 200) {
-          if (status === "authenticated") {
-            update({ name })
-          }
-          window.alert('변경되었습니다.')
-          router.refresh()
-          router.push('/my')
-        }
       })
+      
+      if (res.status === 400)
+          setPwError(4)
+      else if (res.status === 200) {
+        if (status === "authenticated") {
+          await update({ name })
+        }
+        window.alert('변경되었습니다.')
+        router.refresh()
+      }
     }
   }
 
