@@ -1,14 +1,17 @@
-import { fetchData } from '../utils/fetchData'
 import MovieList from '../components/MovieList'
+import { fetchMovies } from '../movies/actions'
 
-export const dynamic = 'force-dynamic' 
+export const dynamic = 'force-dynamic'
 
 export default async function NowPlaying() {
-  const movies = await fetchData('playing')
+  const { results, totalPages } = await fetchMovies('NOW_PLAYING')
 
   return (
-    <>
-      <MovieList movies={movies} filter={0} />
-    </>
+    <MovieList
+      initialItems={results}
+      totalPages={totalPages}
+      fetchItems={fetchMovies}
+      filter={'NOW_PLAYING'}
+    />
   )
 }

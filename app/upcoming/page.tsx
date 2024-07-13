@@ -1,14 +1,17 @@
-import { fetchData } from '../utils/fetchData'
+import { fetchMovies } from '../movies/actions'
 import MovieList from '../components/MovieList'
 
-export const dynamic = 'force-dynamic' 
+export const dynamic = 'force-dynamic'
 
 export default async function UpComing() {
-  const movies = await fetchData('upcoming')
+  const { results, totalPages } = await fetchMovies('UPCOMING')
 
   return (
-    <>
-      <MovieList movies={movies} filter={1} />
-    </>
+    <MovieList
+      initialItems={results}
+      totalPages={totalPages}
+      fetchItems={fetchMovies}
+      filter={'UPCOMING'}
+    />
   )
 }

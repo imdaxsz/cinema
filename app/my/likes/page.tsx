@@ -1,17 +1,15 @@
 import MovieList from '@/app/components/MovieList'
-import { getServerSession } from 'next-auth'
-import { authOptions } from '@/pages/api/auth/[...nextauth]'
-import NotAllowed from '@/app/components/NotAllowed'
+import { fetchLikeMovies } from '@/app/movies/actions'
 
 export default async function Likes() {
-  let session: any = await getServerSession(authOptions)
-  let likes
-  
-  if (session) {
-    likes = await fetch(
-      `${process.env.API_ROOT}/api/likes?userid=${session.user.id}&page=1`,
-      { cache: 'no-store' },
-    ).then((res) => res.json())
-  }
-  return session ? <MovieList movies={likes} filter={3} userId={session.user.id} /> : <NotAllowed />
+  const { results, totalPages } = await fetchLikeMovies()
+
+  return (
+    <MovieList
+      initialItems={results}
+      totalPages={totalPages}
+      fetchItems={fetchLikeMovies}
+      filter={'LIKE'}
+    />
+  )
 }

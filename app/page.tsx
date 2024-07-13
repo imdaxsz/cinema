@@ -1,16 +1,20 @@
 import MovieSlide from './components/MovieSlide'
-import { fetchData } from './utils/fetchData'
+import { fetchMovies } from './movies/actions'
 
-export const dynamic = 'force-dynamic' 
+export const dynamic = 'force-dynamic'
 
 export default async function Home() {
-  const hot = await fetchData('hot')
-  const nowPlaying = await fetchData('playing')
+  const { results: hot } = await fetchMovies('HOT')
+  const { results: nowPlaying } = await fetchMovies('NOW_PLAYING')
+
   return (
     <>
-      <MovieSlide filter="🔥HOT🔥" movies={hot?.results} />
-      <MovieSlide filter="🎞️지금 상영중인 영화💫" movies={nowPlaying?.results} />
-      <div style={{marginTop: '40px'}}></div>
+      <MovieSlide filter="🔥HOT🔥" movies={hot} />
+      <MovieSlide
+        filter="🎞️지금 상영중인 영화💫"
+        movies={nowPlaying}
+      />
+      <div style={{ marginTop: '40px' }}></div>
     </>
   )
 }

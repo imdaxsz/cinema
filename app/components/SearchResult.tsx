@@ -3,34 +3,47 @@
 import Link from 'next/link'
 import styles from '../styles/searchresult.module.css'
 import { useState } from 'react'
-import { moreData } from '../utils/fetchData'
 import Image from 'next/image'
-import { useSearchParams } from 'next/navigation'
+import { FetchMoviesFun } from '../movies/actions'
 
-export default function SearchResult({ movies }: { movies: any }) {
-  const [list, setList] = useState<any[]>(movies.results)
-  const [currentPage, setCurrentPage] = useState<number>(1)
-  const searchParams = useSearchParams()
-  const keyword = searchParams?.get('query')
+interface MovieListProps {
+  keyword: string
+  initialItems: any[]
+  totalPages: number
+  fetchItems: FetchMoviesFun
+  totalCount: number
+}
+
+export default function SearchResult({
+  keyword,
+  initialItems,
+  totalPages,
+  fetchItems,
+  totalCount,
+}: MovieListProps) {
+  const [page, setPage] = useState<number>(1)
+  const [list, setList] = useState<any[]>(initialItems)
 
   const onClick = async () => {
-    if (keyword){
-      moreData(4, currentPage, setCurrentPage, setList, keyword)
-    }
+    const { currentPage, results } = await fetchItems('SEARCH', page + 1, {
+      keyword,
+    })
+    setList((prev) => [...prev, ...results])
+    setPage(currentPage)
   }
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
-        <h3>검색 결과 ({movies.total_results})</h3>
+        <h3>검색 결과 ({totalCount ?? 0})</h3>
         {keyword && (
           <>
             <span>
-              <strong>'{keyword}'</strong>에 대한 검색 결과
+              <strong>{`'${keyword}'`}</strong>에 대한 검색 결과
             </span>
-            {movies.results.length === 0 ? (
+            {totalCount === 0 ? (
               <div className={styles['not-found']}>
-                '<span>{keyword}</span>'에 대한 검색결과가 없습니다.
+                <span>{`'${keyword}'`}</span>에 대한 검색결과가 없습니다.
               </div>
             ) : (
               <div className={styles.list}>
@@ -59,7 +72,7 @@ export default function SearchResult({ movies }: { movies: any }) {
                     </div>
                   </Link>
                 ))}
-                {movies.total_pages > currentPage && (
+                {totalPages > page && (
                   <button className="btn-more" onClick={onClick}>
                     더보기
                   </button>

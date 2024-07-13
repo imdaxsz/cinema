@@ -1,13 +1,21 @@
-import SearchResult from "../components/SearchResult"
-import { searchData } from "../utils/fetchData"
+import SearchResult from '../components/SearchResult'
+import { fetchMovies } from '../movies/actions'
 
-export const dynamic = 'force-dynamic' 
+export const dynamic = 'force-dynamic'
 
 export default async function Search(props: any) {
-  const movies = await searchData(props.searchParams.query)
+  const keyword = props.searchParams.query
+  const { results, totalPages, totalCount } = await fetchMovies('SEARCH', 1, {
+    keyword,
+  })
+
   return (
-    <div>
-      <SearchResult movies={movies} />
-    </div>
+    <SearchResult
+      keyword={keyword}
+      initialItems={results}
+      totalPages={totalPages}
+      fetchItems={fetchMovies}
+      totalCount={totalCount ?? 0}
+    />
   )
 }

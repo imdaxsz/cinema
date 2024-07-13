@@ -1,48 +1,47 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
-import styles from '../styles/list.module.css'
-import { useEffect, useState } from 'react'
-import { getMoreLikes, moreData } from '../utils/fetchData'
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+import styles from '@/app/styles/list.module.css'
+import { FILTER } from '@/app/types'
+import { FetchMoviesFun, SearchOptions } from '@/app/movies/actions'
+import { MOVIE_LIST_TYPE } from '@/app/constant'
+
+interface MovieListProps {
+  initialItems: any[]
+  totalPages: number
+  fetchItems: FetchMoviesFun
+  filter?: FILTER
+  genre?: string
+  searchOptions?: SearchOptions
+}
 
 export default function MovieList({
-  movies,
-  filter,
-  genre,
-  userId,
-}: {
-  movies: any
-  filter: number
-  genre?: string
-  userId?: string
-}) {
-  const [list, setList] = useState<any[]>(movies.results)
-  const [currentPage, setCurrentPage] = useState<number>(1)
-  const router = useRouter()
+  initialItems,
+  totalPages,
+  fetchItems,
+  filter = 'ALL',
+  genre = '',
+  searchOptions,
+}: MovieListProps) {
+  const [page, setPage] = useState<number>(1)
+  const [list, setList] = useState<any[]>(initialItems)
 
   const onClick = async () => {
-    if (filter === 3 && userId)
-      getMoreLikes(userId, currentPage, setCurrentPage, setList)
-    else moreData(filter, currentPage, setCurrentPage, setList)
+    const { currentPage, results } = await fetchItems(
+      filter,
+      page + 1,
+      searchOptions,
+    )
+    setList((prev) => [...prev, ...results])
+    setPage(currentPage)
   }
-
-  const title = [
-    '🎞️지금 상영중인 영화💫',
-    '📆개봉 예정 영화✨',
-    '전체',
-    '관심 영화',
-  ]
-
-  useEffect(() => {
-    router.refresh()
-  }, [])
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
-        {genre ? <h3>{genre}</h3> : <h3>{title[filter]}</h3>}
+        <h3>{filter === 'GENRE' ? genre : MOVIE_LIST_TYPE[filter as FILTER]}</h3>
         <div className={styles.list}>
           {list.map((movie: any) => (
             <Link
@@ -65,12 +64,12 @@ export default function MovieList({
                   />
                 </div>
                 <h4 className={styles.title}>{movie.title}</h4>
-                {filter !== 3 && <span>{movie.release_date} 개봉</span>}
+                {filter !== 'LIKE' && <span>{movie.release_date} 개봉</span>}
               </div>
             </Link>
           ))}
         </div>
-        {movies.total_pages > currentPage && (
+        {totalPages > page && (
           <button className="btn-more" onClick={onClick}>
             더보기
           </button>

@@ -2,7 +2,7 @@ import { db } from '@/util/database'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(req: NextRequest) {
-  const userId = req.nextUrl.searchParams.get('userid')
+  const userId = req.headers.get('user-Id')
   const page = parseInt(req.nextUrl.searchParams.get('page') ?? '')
   const user = await db.collection('user_cred').findOne({ id: userId })
 
@@ -27,7 +27,7 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    const data = { total_pages, results: list }
+    const data = { page, total_pages, results: list }
     return NextResponse.json(data, { status: 200 })
   }
 
