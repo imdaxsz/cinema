@@ -22,22 +22,17 @@ export default function SignIn() {
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (id.length <= 0)
-      setBlankId(true)
-    if (password.length <= 0)
-      setBlankPw(true)
+    if (id.length <= 0) setBlankId(true)
+    if (password.length <= 0) setBlankPw(true)
     if (!blankId && !blankPw) {
-      await signIn("credentials", {
+      const res = await signIn('credentials', {
         id: id,
         password: password,
         redirect: false,
-      }).then((result) => {
-        console.log(result)
-        if (result?.ok)
-          router.push('/')
-        if (result?.error)
-          setError(true)
-      });
+      })
+
+      if (res && res.ok) router.push('/')
+      if (res && res.error) setError(true)
     }
   }
 

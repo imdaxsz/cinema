@@ -16,19 +16,19 @@ export default function Register() {
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
 
-  const checkId = () => {
+  const checkId = async () => {
     setIsDuplicated(false)
     const idReg = /^(?=.*[a-z])[a-z0-9_-]{5,20}$/
-    if (idReg.test(id)) {
-      setValidateId(true)
-      fetch('/api/auth/checkId', { method: 'POST', body: id })
-        .then((res) => {
-          if (res.status === 500) setIsDuplicated(true)
-          else setIsDuplicated(false)
-          return res.text()
-        })
-        .then((result) => setMessage(result.replace(/\"/gi, '')))
-    } else setValidateId(false)
+    const isIdValidate = idReg.test(id);
+    setValidateId(isIdValidate)
+
+    if (isIdValidate) {
+      const res = await fetch('/api/auth/check', { method: 'POST', body: JSON.stringify({ id }) })
+      if (res.status === 409) {
+        setIsDuplicated(true)
+        setMessage('이미 사용중인 아이디입니다.')
+      }
+    }
   }
 
   const checkPassword = () => {
