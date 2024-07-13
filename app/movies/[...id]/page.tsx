@@ -9,12 +9,21 @@ import { fetchMovie } from '../actions'
 
 export default async function Detail(props: any) {
   const id = props.params.id[0]
+  const session: any = await getServerSession(authOptions)
 
   const { info, people, posters, trailer, releaseDate } = await fetchMovie(id)
   const { poster_path, title, original_title, genres, runtime, overview } =
     info?.data
 
-  const session: any = await getServerSession(authOptions)
+  let isLiked = false
+
+  if (session) {
+    const likeRes = await fetch(
+      `${process.env.API_ROOT}/api/like?movieid=${id}`,
+      { headers: { 'User-Id': session.user.id } },
+    ).then((res) => res.json())
+    isLiked = likeRes.isLiked
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -33,7 +42,7 @@ export default async function Detail(props: any) {
                 sizes="50vw"
               />
             </div>
-            <Like user={session?.user} movieId={id} />
+            <Like user={session?.user} movieId={id} isLiked={isLiked} />
           </div>
           <div className={styles.detail}>
             <div className={styles.title}>
@@ -42,12 +51,9 @@ export default async function Detail(props: any) {
             </div>
             <div className={styles.info}>
               <p>
-                장르 : {genres[0] ? genres[0].name : '미정'} /{' '}
-                {info?.country}
+                장르 : {genres[0] ? genres[0].name : '미정'} / {info?.country}
               </p>
-              <p>
-                러닝타임 : {runtime === 0 ? '미정' : `${runtime}분`}
-              </p>
+              <p>러닝타임 : {runtime === 0 ? '미정' : `${runtime}분`}</p>
               <p>
                 개봉 : {releaseDate ? releaseDate.replace(/\-/g, '.') : '미정'}
               </p>

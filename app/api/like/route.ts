@@ -2,22 +2,26 @@ import { db } from '@/util/database'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { NextRequest, NextResponse } from 'next/server'
-import { revalidateTag } from 'next/cache'
 
 // 사용자의 영화 좋아요 여부
 export async function GET(req: NextRequest) {
-  const session: any = await getServerSession(authOptions)
-  if (!session) return NextResponse.json({ isLiked: false }, { status: 200 })
+  const userId = req.headers.get('user-Id')
+  if (!userId) return NextResponse.json({ isLiked: false }, { status: 200 })
 
   const findUserResult = await db
     .collection('user_cred')
-    .findOne({ id: session.user.id })
+    .findOne({ id: userId })
 
   if (findUserResult) {
     const movieId = req.nextUrl.searchParams.get('movieid')
     const isLiked = findUserResult.likes.includes(movieId)
     return NextResponse.json({ isLiked }, { status: 200 })
   }
+  
+  return NextResponse.json(
+    { error: 'error with finding user', isLiked: false },
+    { status: 500 },
+  )
 }
 
 // 좋아요 추가/삭제
