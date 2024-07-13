@@ -4,8 +4,8 @@ import { useRouter } from 'next/navigation'
 import styles from '../styles/searchbar.module.css'
 import { FaSearch } from 'react-icons/fa'
 
-function SearchBar({ keyword }: { keyword?: string }) {
-  const [word, setWord] = useState('')
+function SearchBar({ keyword }: { keyword: string }) {
+  const [word, setWord] = useState(keyword)
   const focusRef = useRef<HTMLInputElement>(null)
   const router = useRouter()
 
@@ -25,8 +25,9 @@ function SearchBar({ keyword }: { keyword?: string }) {
   }
   
   useEffect(() => {
-    if (keyword) setWord(keyword)
-  }, [])
+    console.log('searchbar: ', keyword)
+    setWord(keyword)
+  }, [keyword])
 
   return (
     <form onSubmit={onSubmit} aria-label="검색" role="search">

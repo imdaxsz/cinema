@@ -2,19 +2,26 @@
 
 import Link from 'next/link'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import styles from '../styles/navbar.module.css'
+import styles from '@/app/styles/navbar.module.css'
 import Image from 'next/image'
 import SearchBar from './SearchBar'
+import { useState, useEffect } from 'react'
 
 export default function Navbar() {
   const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const keyword = searchParams?.get('query')
+  const [searchKeyword, setSearchKeyword] = useState('')
+  const searchParams = useSearchParams();
+
   const router = useRouter()
   const onClickMy = () => {
     router.refresh()
     router.push('/my')
   }
+
+  useEffect(() => {
+    const keyword = searchParams.get('query') || ''
+    setSearchKeyword(keyword)
+  }, [searchParams])
 
   return (
     <nav className={styles.nav}>
@@ -55,7 +62,7 @@ export default function Navbar() {
       </Link>
       <div className={styles.right}>
         <div className={styles.item}>
-          <SearchBar keyword={keyword ? keyword : ''} />
+          <SearchBar keyword={searchKeyword} />
         </div>
         <div className={styles.item}>
           <span
