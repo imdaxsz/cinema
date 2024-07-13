@@ -1,6 +1,6 @@
-import Tablist from "../components/TabList"
+import Tablist from "./TabList"
 
-export default function RootLayout({
+export default function GenreLayout({
   children,
 }: {
   children: React.ReactNode

@@ -1,4 +1,4 @@
-import SearchResult from '../components/SearchResult'
+import SearchResult from './SearchResult'
 import { fetchMovies } from '../movies/actions'
 
 export const dynamic = 'force-dynamic'
